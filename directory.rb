@@ -13,12 +13,22 @@ students = [
   "Norman Bates"
 ]
 
-student_count = students.length
+# Outputs header in a multiple lines
+def print_header
+  puts "The students of Villains Academy"
+  puts "-------------"
+end
 
-#  outputs list of students to a new line
-puts "The students of Villains Academy"
-puts "-------------"
-students.each { |student| puts student}
+# Outputs student names per line
+def print(students)
+  students.each { |student| puts student}
+end
 
 # Outputs total in a singular line
-puts "Overall, we have #{student_count} great students"
+def print_footer(students)
+  puts "Overall, we have #{students.length} great students"
+end
+
+print_header
+print(students)
+print_footer(students)
