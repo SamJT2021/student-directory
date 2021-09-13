@@ -10,6 +10,11 @@ def print_students(students)
   students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)"}
 end
 
+# exercises 1: print index of student before student name
+def print_with_index(students)
+  students.each_with_index { |student, index| puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"}
+end
+
 # Outputs total in a singular line
 # param students Array of Hashes
 def print_footer(students)
@@ -37,6 +42,7 @@ def input_students
 
   return students
 end
+
 
 # calls necessary methods
 def run_directory
