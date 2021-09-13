@@ -5,15 +5,19 @@ def print_header
 end
 
 # Outputs student names per line
+# param students Array of Hashes
 def print_students(students)
   students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)"}
 end
 
 # Outputs total in a singular line
+# param students Array of Hashes
 def print_footer(students)
   puts "Overall, we have #{students.length} great students"
 end
 
+# takes user input of student names and adds to an array of hashes
+# returns array of hashes
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -34,18 +38,12 @@ def input_students
   return students
 end
 
-# students = input_students
-# print_header
-# print(students)
-# print_footer(students)
-
-def filter_students(initial, array)
-  return (array.select{ |x| x[0] == initial.to_s})
-
+# calls necessary methods
+def run_directory
+  students = input_students
+  print_header
+  print_students(students)
+  print_footer(students)
 end
 
-students = ['tom', 'john', 'sam', 'troy', 'bradleigh']
-print "a letter pls: "
-initial = gets.chomp
-
-print filter_students(initial, students)
+run_directory
