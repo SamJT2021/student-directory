@@ -35,7 +35,7 @@ end
 # filters student array by first initial
 # param initial String letter to filter students by
 # param student_names Hash students
-def filter_students(initial, student_names)
+def filter_students_by_initial(initial, student_names)
   student_name_array = extract_name(student_names)
   return (student_name_array.select{ |student_name| student_name[0] == initial.to_s.capitalize})
 end
@@ -44,4 +44,4 @@ students = input_students
 print "the first initial of the student(s) you're looking for "
 initial = gets.chomp
 
-print filter_students(initial, students)
+print filter_students_by_initial(initial, students)
