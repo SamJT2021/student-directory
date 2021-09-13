@@ -9,6 +9,11 @@ def print(students)
   students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)"}
 end
 
+# exercises 1: print index of student before student name
+def print_with_index(students)
+  students.each_with_index { |student, index| puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"}
+end
+
 # Outputs total in a singular line
 def print_footer(students)
   puts "Overall, we have #{students.length} great students"
@@ -37,5 +42,5 @@ end
 
 students = input_students
 print_header
-print(students)
+print_with_index(students)
 print_footer(students)
