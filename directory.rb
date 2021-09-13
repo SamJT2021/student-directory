@@ -5,7 +5,7 @@ def print_header
 end
 
 # Outputs student names per line
-def print(students)
+def print_students(students)
   students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)"}
 end
 
@@ -31,11 +31,21 @@ def input_students
     name = gets.chomp
   end
 
-
   return students
 end
 
-students = input_students
-print_header
-print(students)
-print_footer(students)
+# students = input_students
+# print_header
+# print(students)
+# print_footer(students)
+
+def filter_students(initial, array)
+  return (array.select{ |x| x[0] == initial.to_s})
+
+end
+
+students = ['tom', 'john', 'sam', 'troy', 'bradleigh']
+print "a letter pls: "
+initial = gets.chomp
+
+print filter_students(initial, students)
