@@ -36,25 +36,29 @@ def input_students
   return students
 end
 
-def interactive_menu(students)
-  # 1. print the menu and ask the user what to do
-  puts "Please input a number: "
-  puts "1. Input the students"
-  puts "2. Print the students"
-  puts "9. Exit"
-  # 2. read the input and save it into a variable
-  selection = gets.chomp
+def show_students(students)
+  print_header
+  print_students(students)
+  print_footer(students)
+  interactive_menu(students)
+end
+
+def print_menu
+    # 1. print the menu and ask the user what to do
+    puts "Please input a number: "
+    puts "1. Input the students"
+    puts "2. Print the students"
+    puts "9. Exit"
+end
+
+def process(selection, students)
   # 3. do what the user has asked
   case selection
   when "1"
     students = students.concat input_students
     interactive_menu(students)
-
   when "2"
-    print_header
-    print_students(students)
-    print_footer(students)
-    interactive_menu(students)
+    show_students(students)
   when "9"
     puts "Exiting..."
     exit
@@ -63,7 +67,13 @@ def interactive_menu(students)
     puts "Please try again"
     interactive_menu(students)
   end
+end
 
+def interactive_menu(students)
+  # Display menu choices
+  print_menu
+  # 2. read the input and save it into a variable
+  process(gets.chomp, students)
 end
 
 interactive_menu([])
