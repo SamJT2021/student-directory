@@ -7,8 +7,8 @@ def print_header
 end
 
 MONTHS = [
-  'january', 'february', 'march', 'april', 'may', 'june',
-  'july', 'august', 'september', 'october', 'november', 'december'
+  :january, :february, :march, :april, :may, :june,
+  :july, :august, :september, :october, :november, :december
 ]
 
 # Outputs student names per line
@@ -17,25 +17,23 @@ def print_students(students)
   students.each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)"}
 end
 
-# Outputs student names per line
+# Outputs student names per line, grouped by cohort
 # param students Array of Hashes
+# param months array of symbols
 def print_students_by_cohort(students, months)
   months.each { |month| 
-    if month == true
-      puts month + " cohort"
-      month = false
-    end
-    students.each { |student| 
-      if student[:cohort] == month
-        puts student[:name]
-      end
-  }   
-}
-end
-
-# exercises 1: print index of student before student name
-def print_with_index(students)
-  students.each_with_index { |student, index| puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)" }
+    filtered_students = students.select { |student|
+      student[:cohort].to_sym == month
+    }
+  
+    filtered_students_names = []
+    
+    filtered_students.each { |student| 
+      filtered_students_names.push student[:name]
+    }
+  
+  puts month.to_s + "\n" + filtered_students_names.to_s  if filtered_students.length > 0 
+  }
 end
 
 # Outputs total in a singular line
