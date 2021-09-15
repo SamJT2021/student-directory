@@ -14,26 +14,24 @@ def print_footer(students)
 end
 
 # saves input students to csv file
-def save_students(students)
-  file = File.open("students.csv", "w")
-
-  students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+def save_students(students, filename = "students.csv")
+  File::open(filename, "w") do |file|
+    students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
 end
 
 # loads students from csv file
 def load_students(students, filename = "students.csv")
-  file = File.open(filename, "r")
-
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
-    students << {name: name, cohort: cohort.to_sym}
+  File::open(filename, "r") do |file|
+    file.readlines.each do |line|
+    name, cohort = line.chomp.split(',')
+      students << {name: name, cohort: cohort.to_sym}
+    end
   end
-  file.close
 end
 
 # checks if valid filename has been input from the command line
@@ -88,12 +86,16 @@ end
 def process(selection, students)
   case selection
   when "1"
+    p "Selection successful!"
     students = students.concat input_students
   when "2"
+    p "Selection successful!"
     show_students(students)
   when "3"
+    p "Selection successful, saving students to file!"
     save_students(students)
   when "4"
+    p "Selection successful, loading students!"
     try_load_students(students)  
   when "9"
     puts "Exiting..."
