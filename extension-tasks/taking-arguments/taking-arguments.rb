@@ -1,7 +1,5 @@
-# Outputs header in a multiple lines
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy \n -------------"
 end
 
 # Outputs student names per line
@@ -10,14 +8,15 @@ def print_students(students)
   students.each { |student| puts "#{student[:name]}"}
 end
 
+# param students as array of hashes
 def print_footer(students)  
   puts "Overall, we have #{students.length} great students" 
 end
 
+# saves input students to csv file
 def save_students(students)
-  # open the file for writing
   file = File.open("students.csv", "w")
-  # iterate over the array of students
+
   students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
@@ -26,8 +25,10 @@ def save_students(students)
   file.close
 end
 
+# loads students from csv file
 def load_students(students, filename = "students.csv")
   file = File.open(filename, "r")
+
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
     students << {name: name, cohort: cohort.to_sym}
@@ -35,9 +36,10 @@ def load_students(students, filename = "students.csv")
   file.close
 end
 
+# checks if valid filename has been input from the command line
 def try_load_students(students)
   filename = ARGV.first 
-  return if filename.nil? # get out of the method if it isn't given
+  return if filename.nil?
   if File.exists?(filename) 
     load_students(students, filename)
      puts "Loaded #{students.count} from #{filename}"
@@ -50,22 +52,18 @@ end
 # takes user input of student names and adds to an array of hashes
 # returns array of hashes
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
-  # create an empty array
+  puts "Please enter the names of the students \n To finish, just hit return twice"
+
   students = []
-  # get the first name
   name = STDIN.gets.chomp
 
   while !name.empty? do
-    # add student hash into an array
+    # add each individual student hash into an array
     students << {name: name, cohort: :november}
     puts "Now we have #{students.count} students"
 
-    # get another name from the user
     name = STDIN.gets.chomp
   end
-
   return students
 end
 
@@ -76,8 +74,8 @@ def show_students(students)
   interactive_menu(students)
 end
 
+# Displays menu of actions to the user
 def print_menu(filename)
-    # 1. print the menu and ask the user what to do
     puts "Please input a number: "
     puts "1. Input the students"
     puts "2. Print the students"
@@ -86,8 +84,8 @@ def print_menu(filename)
     puts "9. Exit"
 end
 
+# Uses input from interactive menu to run appropriate method
 def process(selection, students)
-  # 3. do what the user has asked
   case selection
   when "1"
     students = students.concat input_students
@@ -101,17 +99,16 @@ def process(selection, students)
     puts "Exiting..."
     exit
   else
-    # 4. repeat from step 1
     puts "Please try again"
-    interactive_menu(students)
   end
   interactive_menu(students)
 end
 
+# runs interactive menu
 def interactive_menu(students, filename = ARGV.first)
   # Display menu choices
   print_menu(filename)
-  # 2. read the input and save it into a variable
+  # Read the input and save it into a variable
   process(STDIN.gets.chomp, students)
 end
 
