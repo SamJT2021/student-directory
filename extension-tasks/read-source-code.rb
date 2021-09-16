@@ -114,4 +114,10 @@ def interactive_menu(students, filename = ARGV.first)
   process(STDIN.gets.chomp, students)
 end
 
-interactive_menu([])
+# interactive_menu([])
+
+def read_source
+  File.open(__FILE__,"r"){|file| file.readlines.each{|line| puts line}}
+end
+
+read_source
